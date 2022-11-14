@@ -61,7 +61,7 @@ for p in range(1, n):
             temp = gauss[j][p - 1]
             for v in range(n):
                 gauss[j][v] = gauss[j][v] - ((temp * gauss[i][v]) / gauss[i][p - 1])
-            print(f"R{j + 1} -> R{j + 1} + ({round(-temp / gauss[i][p - 1], 3)})xR{i + 1}")
+            print(f"\nR{j + 1} -> R{j + 1} + ({round(-temp / gauss[i][p - 1], 3)})xR{i + 1}\n")
             printer()
             print("\n")
     i += 1
@@ -75,3 +75,17 @@ for g in range(n):
 
     printer()
     print("\n")
+j = ""
+while j.lower() != "yes" and j.lower() != "no":
+    j = input("Jordan ? (Yes/No) : ")
+
+if j.lower() == "yes":
+    for w in range(n - 1, 0, -1):
+        o = 0
+        for e in range(w - 1, -1, -1):
+            o += 1
+            print(f"\nR{e + 1} -> R{e + 1} + (R{w + 1} * {round(-gauss[e][w], 3)})\n")
+            output[e] = output[e + o] * (-gauss[e][w]) + output[e]
+            gauss[e][w] = gauss[e + o][e + o] * (-gauss[e][w]) + gauss[e][w]
+            printer()
+            print("\n")
