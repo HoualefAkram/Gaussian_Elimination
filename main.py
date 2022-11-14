@@ -1,3 +1,5 @@
+from fractions import Fraction
+
 n = int(input("number of equations : "))
 gauss = []
 output = []
@@ -16,8 +18,8 @@ def bad_row(row):
 
 def printer():
     for lists, values in zip(gauss, output):
-        lists = list(map(lambda x: round(x, 3), lists))
-        print(lists, round(values, 3))
+        lists = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=10000)), lists))
+        print(lists, str(Fraction(values).limit_denominator(max_denominator=10000)))
 
 
 # making the matrix
@@ -61,13 +63,14 @@ for p in range(1, n):
             temp = gauss[j][p - 1]
             for v in range(n):
                 gauss[j][v] = gauss[j][v] - ((temp * gauss[i][v]) / gauss[i][p - 1])
-            print(f"\nR{j + 1} -> R{j + 1} + ({round(-temp / gauss[i][p - 1], 3)})xR{i + 1}\n")
+            print(
+                f"\nR{j + 1} -> R{j + 1} + ({str(Fraction(-temp / gauss[i][p - 1]).limit_denominator(max_denominator=10000))})xR{i + 1}\n")
             printer()
             print("\n")
     i += 1
 
 for g in range(n):
-    print(f"\nR{g + 1}/{round(gauss[g][g], 3)}\n")
+    print(f"\nR{g + 1}/({str(Fraction(gauss[g][g]).limit_denominator(max_denominator=10000))})\n")
     output[g] = output[g] / gauss[g][g]
     temp2 = gauss[g][g]
     for h in range(n):
@@ -84,7 +87,7 @@ if j.lower() == "yes":
         o = 0
         for e in range(w - 1, -1, -1):
             o += 1
-            print(f"\nR{e + 1} -> R{e + 1} + (R{w + 1} * {round(-gauss[e][w], 3)})\n")
+            print(f"\nR{e + 1} -> R{e + 1} + (R{w + 1} * {str(Fraction(-gauss[e][w]).limit_denominator(max_denominator=10000))})\n")
             output[e] = output[e + o] * (-gauss[e][w]) + output[e]
             gauss[e][w] = gauss[e + o][e + o] * (-gauss[e][w]) + gauss[e][w]
             printer()
