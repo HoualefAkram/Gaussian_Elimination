@@ -103,26 +103,75 @@ if ask == "1":
                 printer()
                 print("\n")
 
-# else:
-#     n = int(input("Matrix Order: "))
-#     gauss = []
-#     output = identity(n)
-#     k = 0
-#     i = 0
-#
-#     def printer():
-#         for lists, iden in zip(gauss, output):
-#             lists = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=100000)), lists))
-#             iden = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=100000)), iden))
-#             print(f"{lists} ⅼ {iden}")
-#
-#
-#     # making the matrix
-#     for lines in range(n):
-#         line_matrix = []
-#         for columns in range(n):
-#             line_matrix.append(int(input(f"Line {lines + 1} Column {columns + 1} : ")))
-#         gauss.append(line_matrix)
-#
-#     printer()
-#     print("\n")
+else:
+    n = int(input("Matrix Order: "))
+    gauss = []
+    output = identity(n)
+    k = 0
+    i = 0
+
+
+    def printer():
+        for lists, iden in zip(gauss, output):
+            lists = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=100000)), lists))
+            iden = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=100000)), iden))
+            print(f"{lists} ⅼ {iden}")
+
+
+    # making the matrix
+    for lines in range(n):
+        line_matrix = []
+        for columns in range(n):
+            line_matrix.append(int(input(f"Line {lines + 1} Column {columns + 1} : ")))
+        gauss.append(line_matrix)
+
+    printer()
+    print("\n")
+    for p in range(1, n):
+        for j in range(p, n):
+            if gauss[i][p - 1] == 0:  # checking for Division By 0
+                for d in range(n):  # all lines
+                    if gauss[d][p - 1] != 0:
+                        for m in range(n):  # swap
+                            temp = gauss[i][m]
+                            gauss[i][m] = gauss[d][m]
+                            gauss[d][m] = temp
+                            temp = output[i][m]
+                            output[i][m] = output[d][m]
+                            output[d][m] = temp
+                        print(f"swapped between row {i + 1} and {d + 1}")
+                        printer()
+                        print("\n")
+            if gauss[j][i] != 0:
+                temp = gauss[j][p - 1]
+                for v in range(n):
+                    output[j][v] = output[j][v] - ((temp * output[i][v]) / gauss[i][p - 1])
+                    gauss[j][v] = gauss[j][v] - ((temp * gauss[i][v]) / gauss[i][p - 1])
+                print(
+                    f"\nR{j + 1} -> R{j + 1} + ({str(Fraction(-temp / gauss[i][p - 1]).limit_denominator(max_denominator=10000))})xR{i + 1}\n")
+                printer()
+                print("\n")
+        i += 1
+
+    for g in range(n):
+        print(f"\nR{g + 1}/({str(Fraction(gauss[g][g]).limit_denominator(max_denominator=10000))})\n")
+        temp2 = gauss[g][g]
+        for h in range(n):
+            output[g][h] = output[g][h] / temp2
+            gauss[g][h] = gauss[g][h] / temp2
+
+        printer()
+        print("\n")
+
+    for w in range(n - 1, 0, -1):
+        o = 0
+        for e in range(w - 1, -1, -1):
+            o += 1
+            print(
+                f"\nR{e + 1} -> R{e + 1} + (R{w + 1} * {str(Fraction(-gauss[e][w]).limit_denominator(max_denominator=10000))})\n")
+            for r in range(n):
+                output[e][r] = output[e + o][r] * (-gauss[e][w]) + output[e][r]
+
+            gauss[e][w] = gauss[e + o][e + o] * (-gauss[e][w]) + gauss[e][w]
+            printer()
+            print("\n")
