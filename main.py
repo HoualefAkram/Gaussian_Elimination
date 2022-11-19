@@ -14,15 +14,6 @@ if ask == "1":
     i = 0
 
 
-    def bad_row(row):
-        try:
-            if gauss[row][0] == 0:
-                return True
-            return False
-        except:
-            return False
-
-
     def printer():
         for lists, values in zip(gauss, output):
             lists = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=10000)), lists))
