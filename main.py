@@ -2,10 +2,12 @@ import sys
 from fractions import Fraction
 from numpy import identity
 
+determinant = 1
 ask = ""
 while ask != "1" and ask != "2":
     ask = input("1)system of equations\n2)Inverse Matrix\n3)Choose : ")
 if ask == "1":
+    
 
     n = int(input("number of equations : "))
     gauss = []
@@ -64,6 +66,8 @@ if ask == "1":
                 printer()
                 print("\n")
         i += 1
+    for det in range(n):
+        determinant = determinant * gauss[det][det]
 
     for g in range(n):
         print(f"\nR{g + 1}/({str(Fraction(gauss[g][g]).limit_denominator(max_denominator=10000))})\n")
@@ -78,6 +82,7 @@ if ask == "1":
 
         printer()
         print("\n")
+        print(f"determinant = {str(Fraction(determinant).limit_denominator(max_denominator=10000))}")
     j = ""
     while j.lower() != "yes" and j.lower() != "no":
         j = input("Jordan ? (Yes/No) : ")
@@ -143,7 +148,8 @@ else:
                 printer()
                 print("\n")
         i += 1
-
+    for det in range(n):
+        determinant = determinant * gauss[det][det]
     for g in range(n):
         print(f"\nR{g + 1}/({str(Fraction(gauss[g][g]).limit_denominator(max_denominator=10000))})\n")
         temp2 = gauss[g][g]
@@ -166,3 +172,4 @@ else:
             gauss[e][w] = gauss[e + o][e + o] * (-gauss[e][w]) + gauss[e][w]
             printer()
             print("\n")
+print(f"determinant = {str(Fraction(determinant).limit_denominator(max_denominator=10000))}")
