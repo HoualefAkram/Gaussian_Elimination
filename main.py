@@ -7,7 +7,6 @@ ask = ""
 while ask != "1" and ask != "2":
     ask = input("1)system of equations\n2)Inverse Matrix\n3)Choose : ")
 if ask == "1":
-    
 
     n = int(input("number of equations : "))
     gauss = []
@@ -46,6 +45,7 @@ if ask == "1":
             if gauss[i][p - 1] == 0:  # checking for Division By 0
                 for d in range(n):  # all lines
                     if gauss[d][p - 1] != 0:
+                        determinant = determinant * -1
                         for m in range(n):  # swap
                             temp = gauss[i][m]
                             gauss[i][m] = gauss[d][m]
@@ -128,6 +128,7 @@ else:
             if gauss[i][p - 1] == 0:  # checking for Division By 0
                 for d in range(n):  # all lines
                     if gauss[d][p - 1] != 0:
+                        determinant = determinant * -1
                         for m in range(n):  # swap
                             temp = gauss[i][m]
                             gauss[i][m] = gauss[d][m]
