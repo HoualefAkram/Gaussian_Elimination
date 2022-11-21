@@ -35,7 +35,7 @@ if ask == "1":
 
             lines_list.append(int(v))
         w = equations[equations.index("=") + 1::]
-        output.append(int(w))
+        output.append(float(w))
         gauss.append(lines_list)
     printer()
     print("\n")
