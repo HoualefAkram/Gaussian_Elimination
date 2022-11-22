@@ -4,6 +4,7 @@ from numpy import identity
 
 determinant = 1
 ask = ""
+prin = 0
 while ask != "1" and ask != "2":
     ask = input("1)system of equations\n2)Inverse Matrix\n3)Choose : ")
 if ask == "1":
@@ -16,9 +17,15 @@ if ask == "1":
 
 
     def printer():
-        for lists, values in zip(gauss, output):
-            lists = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=10000)), lists))
-            print(lists, str(Fraction(values).limit_denominator(max_denominator=10000)))
+        global prin
+        print()
+        while prin < len(output):
+            for t in gauss:
+                for b in t:
+                    print(f"{str(Fraction(b).limit_denominator(max_denominator=10000)):6}", end=' ')
+                print(f"∣   {str(Fraction(output[prin]).limit_denominator(max_denominator=10000))}")
+                prin += 1
+        prin = 0
 
 
     # making the matrix
@@ -82,7 +89,7 @@ if ask == "1":
 
         printer()
         print("\n")
-        print(f"determinant = {str(Fraction(determinant).limit_denominator(max_denominator=10000))}")
+    print(f"determinant = {str(Fraction(determinant).limit_denominator(max_denominator=10000))}")
     j = ""
     while j.lower() != "yes" and j.lower() != "no":
         j = input("Jordan ? (Yes/No) : ")
@@ -108,10 +115,13 @@ else:
 
 
     def printer():
-        for lists, iden in zip(gauss, output):
-            lists = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=100000)), lists))
-            iden = list(map(lambda x: str(Fraction(x).limit_denominator(max_denominator=100000)), iden))
-            print(f"{lists} ⅼ {iden}")
+        for i1, j1 in zip(gauss, output):
+            for k1 in i1:
+                print(f"{str(Fraction(k1).limit_denominator(max_denominator=10000)):6}", end=" ")
+            print("∣   ", end="")
+            for f in j1:
+                print(f"{str(Fraction(f).limit_denominator(max_denominator=10000)):7}", end=" ")
+            print()
 
 
     # making the matrix
