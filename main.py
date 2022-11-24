@@ -50,7 +50,7 @@ if ask == "1":
     for p in range(1, n):
         for j in range(p, n):
             if gauss[i][p - 1] == 0:  # checking for Division By 0
-                for d in range(n):  # all lines
+                for d in range(i + 1, n):  # all lines
                     if gauss[d][p - 1] != 0:
                         determinant = determinant * -1
                         for m in range(n):  # swap
@@ -63,6 +63,8 @@ if ask == "1":
                         print(f"swapped between row {i + 1} and {d + 1}")
                         printer()
                         print("\n")
+                        break
+
             if gauss[j][i] != 0:
                 output[j] = output[p - 1] * (-gauss[j][i] / gauss[i][p - 1]) + output[j]
                 temp = gauss[j][p - 1]
@@ -136,19 +138,20 @@ else:
     for p in range(1, n):
         for j in range(p, n):
             if gauss[i][p - 1] == 0:  # checking for Division By 0
-                for d in range(n):  # all lines
+                for d in range(i + 1, n):  # all lines
                     if gauss[d][p - 1] != 0:
                         determinant = determinant * -1
                         for m in range(n):  # swap
                             temp = gauss[i][m]
                             gauss[i][m] = gauss[d][m]
                             gauss[d][m] = temp
-                            temp = output[i][m]
-                            output[i][m] = output[d][m]
-                            output[d][m] = temp
+                        temp = output[i]
+                        output[i] = output[d]
+                        output[d] = temp
                         print(f"swapped between row {i + 1} and {d + 1}")
                         printer()
                         print("\n")
+                        break
             if gauss[j][i] != 0:
                 temp = gauss[j][p - 1]
                 for v in range(n):
