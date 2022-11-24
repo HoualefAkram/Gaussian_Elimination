@@ -151,6 +151,7 @@ else:
                         print(f"swapped between row {i + 1} and {d + 1}")
                         printer()
                         print("\n")
+                        break
             if gauss[j][i] != 0:
                 temp = gauss[j][p - 1]
                 for v in range(n):
