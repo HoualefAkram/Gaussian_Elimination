@@ -145,13 +145,12 @@ else:
                             temp = gauss[i][m]
                             gauss[i][m] = gauss[d][m]
                             gauss[d][m] = temp
-                        temp = output[i]
-                        output[i] = output[d]
-                        output[d] = temp
+                            temp = output[i][m]
+                            output[i][m] = output[d][m]
+                            output[d][m] = temp
                         print(f"swapped between row {i + 1} and {d + 1}")
                         printer()
                         print("\n")
-                        break
             if gauss[j][i] != 0:
                 temp = gauss[j][p - 1]
                 for v in range(n):
