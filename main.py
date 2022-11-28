@@ -22,8 +22,8 @@ if ask == "1":
         while prin < len(output):
             for t in gauss:
                 for b in t:
-                    print(f"{str(Fraction(b).limit_denominator(max_denominator=10000)):6}", end=' ')
-                print(f"∣   {str(Fraction(output[prin]).limit_denominator(max_denominator=10000))}")
+                    print(f"{str(Fraction(b).limit_denominator(max_denominator=100000)):6}", end=' ')
+                print(f"∣   {str(Fraction(output[prin]).limit_denominator(max_denominator=100000))}")
                 prin += 1
         prin = 0
 
@@ -71,7 +71,7 @@ if ask == "1":
                 for v in range(n):
                     gauss[j][v] = gauss[j][v] - ((temp * gauss[i][v]) / gauss[i][p - 1])
                 print(
-                    f"\nR{j + 1} -> R{j + 1} + ({str(Fraction(-temp / gauss[i][p - 1]).limit_denominator(max_denominator=10000))})xR{i + 1}\n")
+                    f"\nR{j + 1} -> R{j + 1} + ({str(Fraction(-temp / gauss[i][p - 1]).limit_denominator(max_denominator=100000))})xR{i + 1}\n")
                 printer()
                 print("\n")
         i += 1
@@ -79,7 +79,7 @@ if ask == "1":
         determinant = determinant * gauss[det][det]
 
     for g in range(n):
-        print(f"\nR{g + 1}/({str(Fraction(gauss[g][g]).limit_denominator(max_denominator=10000))})\n")
+        print(f"\nR{g + 1}/({str(Fraction(gauss[g][g]).limit_denominator(max_denominator=100000))})\n")
         try:
             output[g] = output[g] / gauss[g][g]
         except ZeroDivisionError:
@@ -91,7 +91,7 @@ if ask == "1":
 
         printer()
         print("\n")
-    print(f"determinant = {str(Fraction(determinant).limit_denominator(max_denominator=10000))}")
+    print(f"determinant = {str(Fraction(determinant).limit_denominator(max_denominator=100000))}")
     j = ""
     while j.lower() != "yes" and j.lower() != "no":
         j = input("Jordan ? (Yes/No) : ")
@@ -102,7 +102,7 @@ if ask == "1":
             for e in range(w - 1, -1, -1):
                 o += 1
                 print(
-                    f"\nR{e + 1} -> R{e + 1} + (R{w + 1} * {str(Fraction(-gauss[e][w]).limit_denominator(max_denominator=10000))})\n")
+                    f"\nR{e + 1} -> R{e + 1} + (R{w + 1} * {str(Fraction(-gauss[e][w]).limit_denominator(max_denominator=100000))})\n")
                 output[e] = output[e + o] * (-gauss[e][w]) + output[e]
                 gauss[e][w] = gauss[e + o][e + o] * (-gauss[e][w]) + gauss[e][w]
                 printer()
@@ -119,10 +119,10 @@ else:
     def printer():
         for i1, j1 in zip(gauss, output):
             for k1 in i1:
-                print(f"{str(Fraction(k1).limit_denominator(max_denominator=10000)):6}", end=" ")
+                print(f"{str(Fraction(k1).limit_denominator(max_denominator=100000)):6}", end=" ")
             print("∣   ", end="")
             for f in j1:
-                print(f"{str(Fraction(f).limit_denominator(max_denominator=10000)):7}", end=" ")
+                print(f"{str(Fraction(f).limit_denominator(max_denominator=100000)):7}", end=" ")
             print()
 
 
@@ -158,14 +158,14 @@ else:
                     output[j][v] = output[j][v] - ((temp * output[i][v]) / gauss[i][p - 1])
                     gauss[j][v] = gauss[j][v] - ((temp * gauss[i][v]) / gauss[i][p - 1])
                 print(
-                    f"\nR{j + 1} -> R{j + 1} + ({str(Fraction(-temp / gauss[i][p - 1]).limit_denominator(max_denominator=10000))})xR{i + 1}\n")
+                    f"\nR{j + 1} -> R{j + 1} + ({str(Fraction(-temp / gauss[i][p - 1]).limit_denominator(max_denominator=100000))})xR{i + 1}\n")
                 printer()
                 print("\n")
         i += 1
     for det in range(n):
         determinant = determinant * gauss[det][det]
     for g in range(n):
-        print(f"\nR{g + 1}/({str(Fraction(gauss[g][g]).limit_denominator(max_denominator=10000))})\n")
+        print(f"\nR{g + 1}/({str(Fraction(gauss[g][g]).limit_denominator(max_denominator=100000))})\n")
         temp2 = gauss[g][g]
         for h in range(n):
             output[g][h] = output[g][h] / temp2
@@ -179,11 +179,11 @@ else:
         for e in range(w - 1, -1, -1):
             o += 1
             print(
-                f"\nR{e + 1} -> R{e + 1} + (R{w + 1} * {str(Fraction(-gauss[e][w]).limit_denominator(max_denominator=10000))})\n")
+                f"\nR{e + 1} -> R{e + 1} + (R{w + 1} * {str(Fraction(-gauss[e][w]).limit_denominator(max_denominator=100000))})\n")
             for r in range(n):
                 output[e][r] = output[e + o][r] * (-gauss[e][w]) + output[e][r]
 
             gauss[e][w] = gauss[e + o][e + o] * (-gauss[e][w]) + gauss[e][w]
             printer()
             print("\n")
-print(f"determinant = {str(Fraction(determinant).limit_denominator(max_denominator=10000))}")
+print(f"determinant = {str(Fraction(determinant).limit_denominator(max_denominator=100000))}")
